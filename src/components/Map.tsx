@@ -26,12 +26,6 @@ const Map: React.FC<MapProps> = ({ data }) => {
     const map = useMap();
 
     useEffect(() => {
-      setTimeout(() => {
-        map.invalidateSize();
-      }, 250);
-    }, [map]);
-
-    useEffect(() => {
       if (map) {
         map.flyTo(center, 13, {
           animate: true,
