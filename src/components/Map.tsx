@@ -1,13 +1,19 @@
-import { LatLngTuple } from "leaflet";
+import { LatLngTuple, icon } from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import { useEffect, useMemo } from "react";
 import "leaflet/dist/leaflet.css";
 
 import { IP } from "../../types";
-import { useEffect, useMemo } from "react";
+import LocationIcon from "../assets/icon-location.svg";
 
 interface MapProps {
   data: IP | null;
 }
+
+const ICON = icon({
+  iconUrl: LocationIcon,
+  iconSize: [48, 48],
+});
 
 const Map: React.FC<MapProps> = ({ data }) => {
   const center = useMemo(() => {
@@ -29,7 +35,7 @@ const Map: React.FC<MapProps> = ({ data }) => {
     }, [map]);
 
     return (
-      <Marker position={center}>
+      <Marker icon={ICON} position={center}>
         <Popup>
           {data?.location.city}, {data?.location.country}
         </Popup>
